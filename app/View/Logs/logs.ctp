@@ -1,0 +1,16 @@
+<a href="<?= $this->Html->url(array("controller" => "projects", "action"=>"view", $project['Project']['projectId']));?>">Back to project overview</a><br>
+<a href="<?= $this->Html->url(array("controller"=>"logs", "action"=>"add", $project['Project']['projectId']));?>">Add new log entry</a>
+<h2>Log entries</h2>
+<?php foreach($log_entries as $log_entry) : ?>
+	<div class="short_log_entry">
+		<div style="width: 16%; display: inline-block; margin-left: -4px;">
+			<?=$log_entry['User']['firstname'] . " " . $log_entry['User']['lastname']; ?>
+		</div>
+		<div style="width: 64%; display: inline-block; margin-left: -4px;">
+			<a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId'] . "/logs/" . $log_entry['Log']['logId']);?>"><?=$log_entry['Log']['message'];?></a>
+		</div>
+		<div style="text-align: right; width: 20%; display: inline-block; margin-left: -4px;">
+			<?=$log_entry['Log']['created'];?>
+		</div>
+	</div>
+<?php endforeach; ?>
