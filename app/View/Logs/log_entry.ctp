@@ -6,7 +6,7 @@
 	?>
 	
 	
-	<div class="author"><?=$log['User']['firstname'];?> <?=$log['User']['lastname'];?> wrote:</div>
+	<div class="author"><?=$log['CreatedBy']['firstname'];?> <?=$log['CreatedBy']['lastname'];?> wrote:</div>
 	<div class="message"><?=$log['Log']['message'];?></div>
 	<div class="date"><?=$log['Log']['created'];?></div>
 </div>

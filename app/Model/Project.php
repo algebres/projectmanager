@@ -25,6 +25,16 @@
 				'dependant'		=> TRUE
 			)
 		);
+		public $belongsTo  = array(
+			'CreatedBy' => array(
+				'className' => 'User',
+				'foreignKey' => 'createdBy'
+				),
+			'ChangedBy' => array(
+				'className' => 'User',
+				'foreignKey' => 'changedBy'
+				)
+			);
 		public $hasAndBelongsToMany = array(
 			'UserGroup' => array(
 				'className' => 'UserGroup',

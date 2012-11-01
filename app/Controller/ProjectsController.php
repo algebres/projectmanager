@@ -17,17 +17,17 @@
 			);
 			
 			$milestones = $this->Milestone->find('all', array(
-				'conditions' => array('projectId' => $projectId),
+				'conditions' => array('Project.projectId' => $projectId),
 				)
 			);
 	
 			$issues = $this->Issue->find('all', array(
-				'conditions' => array('projectId' => $projectId),
+				'conditions' => array('Project.projectId' => $projectId),
 				)
 			);
 			
 			$tasks = $this->Task->find('all', array(
-				'conditions' => array('projectId' => $projectId)
+				'conditions' => array('Project.projectId' => $projectId)
 				)
 			);
 			

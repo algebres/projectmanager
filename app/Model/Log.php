@@ -4,9 +4,13 @@
 		public $primaryKey = "logId";
 		
 		public $belongsTo  = array(
-			'User' => array(
+			'CreatedBy' => array(
 				'className' => 'User',
 				'foreignKey' => 'createdBy'
+				),
+			'ChangedBy' => array(
+				'className' => 'User',
+				'foreignKey' => 'changedBy'
 				),
 			'Project' => array(
 				'className' => 'Project',
