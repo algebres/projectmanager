@@ -21,6 +21,20 @@
  <a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "logs"));?>">Show all log entries</a>
 </div>
 
+<h2>Last 5 Tasks</h2>
+<?php foreach ($tasks as $task) : ?>
+	<div class="task">
+		<div>
+			<span style="display:inline-block; width: 80px;" class="priority <?=$task['Task']['priority'];?>">
+				<?=$task['Task']['priority'];?>
+			</span>
+			<a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId'] . "/tasks/" . $task['Task']['taskId']);?>"><?=$task['Task']['description'];?></a>
+		</div>
+	</div>
+<?php endforeach; ?>
+<div style="text-align: right;">
+ <a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "tasks"));?>">Show all tasks</a>
+</div>
 
 
 

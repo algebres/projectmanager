@@ -18,16 +18,19 @@
 			
 			$milestones = $this->Milestone->find('all', array(
 				'conditions' => array('Project.projectId' => $projectId),
+				'limit' => 5
 				)
 			);
 	
 			$issues = $this->Issue->find('all', array(
 				'conditions' => array('Project.projectId' => $projectId),
+				'limit' => 5
 				)
 			);
 			
 			$tasks = $this->Task->find('all', array(
-				'conditions' => array('Project.projectId' => $projectId)
+				'conditions' => array('Project.projectId' => $projectId),
+				'limit' => 5
 				)
 			);
 			
