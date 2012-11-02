@@ -33,5 +33,15 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 	public $helpers = array('Html', 'Js' , 'Form');
-	public $components = array('Session');
+	public $components = array(
+		'Auth' => array(
+            'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
+        ),
+		'Session'
+	);
+	
+	public function beforeFilter() {
+        $this->Auth->allow('index', 'view');
+    }
 }

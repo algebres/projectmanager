@@ -3,7 +3,7 @@
 		public $uses = array('Project', 'Log', 'Milestone', 'Issue', 'Task', 'UserGroup');
 		
 		public function index() {
-			$this->set("projects", $this->Project->find('all', array('conditions' => array('isDeleted' => 0 ))));
+			$this->set("projects", $this->Project->find('all', array('conditions' => array('Project.isDeleted' => 0 ))));
 		}
 		
 		public function add() {
