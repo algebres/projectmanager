@@ -11,7 +11,42 @@
 			
 			$this->set("projectId", $params[0]);
 		}
-		public function delete() {}
+		public function delete($taskId) {
+			$this->autoRender = false;
+			
+			$this->Task->read(null, $taskId);
+			$this->Task->set('isDeleted', true);
+			$this->Task->save();
+			
+			$this->redirect($this->referer());
+		}
+		public function restore($taskId) {
+			$this->autoRender = false;
+			
+			$this->Task->read(null, $taskId);
+			$this->Task->set('isDeleted', false);
+			$this->Task->save();
+			
+			$this->redirect($this->referer());
+		}
+		public function close($taskId) {
+			$this->autoRender = false;
+			
+			$this->Task->read(null, $taskId);
+			$this->Task->set('status', false);
+			$this->Task->save();
+			
+			$this->redirect($this->referer());
+		}
+		public function open($taskId) {
+			$this->autoRender = false;
+			
+			$this->Task->read(null, $taskId);
+			$this->Task->set('status', true);
+			$this->Task->save();
+			
+			$this->redirect($this->referer());
+		}
 		public function tasks($projectId) {
 			 $project = $this->Task->Project->find('first', array(
 				'recursive' => 0,

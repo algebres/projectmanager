@@ -48,26 +48,14 @@
  <a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "milestones"));?>">Show all milestones</a>
 </div>
 
-
-
-
-
-
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<?php
-	print_r($project);
-	echo '<hr>';
-	print_r($log_entries);
-	echo '<hr>';
-	print_r($milestones);
-	echo '<hr>';
-	print_r($issues);
-	echo '<hr>';
-	print_r($tasks);
-	echo '<hr>';
-	print_r($project);
-?>
+<h2>Last 5 Issues</h2>
+<?php foreach ($issues as $issue) : ?>
+	<div class="issue">
+		<div>
+			<a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId'] . "/issues/" . $issue['Issue']['issueId']);?>"><?=$issue['Issue']['name'];?></a>
+		</div>
+	</div>
+<?php endforeach; ?>
+<div style="text-align: right;">
+ <a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "issues"));?>">Show all issues</a>
+</div>
