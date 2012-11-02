@@ -10,6 +10,10 @@
 			Number of issues: <?=count($project['Issue']);?>
 		</div>
 		
-		<a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId']); ?>">VIEW</a> | <a href="">EDIT</a>
+		<ul>
+			<li><a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId']); ?>">VIEW</a></li>
+			<li><a href="<?=$this->Html->url("/projects/edit/" . $project['Project']['projectId']); ?>">EDIT</a></li>
+			<li><a href="<?=$this->Html->url("/projects/delete/" . $project['Project']['projectId']); ?>">DELETE</a></li>
+		</ul>
 	</div>
 <?php endforeach; ?>

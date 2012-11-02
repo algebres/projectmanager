@@ -43,5 +43,12 @@
 				'associationForeignKey' => 'userGroupId'
 			)
 	    ); 
+	    
+		function beforeSave($options) {
+			if (empty($this->data['Project']['changed'])) {
+				$this->data['Project']['changed'] = date("Y-m-d H:i:s");
+			}
+			return true;
+		}
 	}
 ?>
