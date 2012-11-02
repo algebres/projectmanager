@@ -17,7 +17,7 @@
 			);
 			
 			$milestones = $this->Milestone->find('all', array(
-				'conditions' => array('Project.projectId' => $projectId),
+				'conditions' => array('Project.projectId' => $projectId, 'isDeleted' => 0),
 				'limit' => 5
 				)
 			);

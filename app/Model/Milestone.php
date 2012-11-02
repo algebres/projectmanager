@@ -17,5 +17,37 @@
 				'foreignKey' => 'projectId'
 				)
 			);
+			
+		public $hasAndBelongsToMany = array(
+			'Issues' => array(
+				'className' => 'Issue',
+				'joinTable' => 'issuesInMilestones',
+				'foreignKey' => 'milestoneId',
+				'associationForeignKey' => 'issueId'
+				)
+			);
+			
+		public function afterFind($results, $primary = false) {
+			foreach ( $results as $key => $val ) {
+				if (isset($val['Milestone']['status']))
+					$results[$key]['Milestone']['status'] = $this->statusAfterFind($val['Milestone']['status']);
+			}
+			return $results;
+		}
+		
+		public function statusAfterFind($status) {
+			$string = "";
+			switch ($status) {
+				case 1:
+					$string = "Open";
+					break;
+				case 2:
+					$string = "Closed";
+					break;
+				default:
+					$string = "N/A";
+			}
+			return $string;
+		}
 	}
 ?>

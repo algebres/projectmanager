@@ -53,5 +53,13 @@
 			$this->set("log", $log);
 			$this->set("projectId", $projectId);
 		}
+		
+		public function addToMilestone($logId, $milestoneId) {
+			
+		}
+		
+		public function removeFromMilestone($logId) {
+			
+		}
 	}
 ?>

@@ -36,6 +36,18 @@
  <a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "tasks"));?>">Show all tasks</a>
 </div>
 
+<h2>Last 5 Milestones</h2>
+<?php foreach ($milestones as $milestone) : ?>
+	<div class="milestone">
+		<div>
+			<a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId'] . "/milestones/" . $milestone['Milestone']['milestoneId']);?>"><?=$milestone['Milestone']['name'];?></a>
+		</div>
+	</div>
+<?php endforeach; ?>
+<div style="text-align: right;">
+ <a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "milestones"));?>">Show all milestones</a>
+</div>
+
 
 
 
