@@ -24,23 +24,30 @@
 				)
 			);
 		
+		function beforeSave($options) {
+			if (empty($this->data['Task']['changed'])) {
+				$this->data['Task']['changed'] = date("Y-m-d H:i:s");
+			}
+			return true;
+		}
+		
 		public function afterFind($results, $primary = false) {
 			foreach ( $results as $key => $val ) {
 				if (isset($val['Task']['priority'])) 
 					$results[$key]['Task']['priority'] = $this->priorityAfterFind($val['Task']['priority']); 
-				if (isset($val['Task']['status']))
-					$results[$key]['Task']['status'] = $this->statusAfterFind($val['Task']['status']);
+				if (isset($val['Task']['isClosed']))
+					$results[$key]['Task']['isClosed'] = $this->isClosedAfterFind($val['Task']['isClosed']);
 			}
 			return $results;
 		}
 		
-		public function statusAfterFind($status) {
+		public function isClosedAfterFind($isClosed) {
 			$string = "";
-			switch ($status) {
-				case 1:
+			switch ($isClosed) {
+				case 0:
 					$string = "Open";
 					break;
-				case 2:
+				case 1:
 					$string = "Closed";
 					break;
 				default:

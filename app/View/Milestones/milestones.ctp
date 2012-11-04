@@ -1,5 +1,5 @@
-<a href="<?= $this->Html->url(array("controller" => "projects", "action"=>"view", $project['Project']['projectId']));?>">Back to project overview</a><br>
-<a href="<?= $this->Html->url(array("controller"=>"milestones", "action"=>"add", $project['Project']['projectId']));?>">Add new </a>
+<a class="btn gray" href="<?= $this->Html->url(array("controller"=>"milestones", "action"=>"add", $project['Project']['projectId']));?>">Add Milestone</a>
+<h2>Milestones</h2>
 
 <?php foreach ($milestones as $milestone) : ?>
 	<div class="milestone">

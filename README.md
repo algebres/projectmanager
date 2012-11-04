@@ -1,3 +1,25 @@
+syron project manager
+=====================
+
+About
+-----
+This project manager is especially designed for people/companies wanting closer contact with their customers. What that means is pretty simple. There will be a user management system, where you can create users and assign this user to a user group. The user group can be assigned to a project. Each user group assigned to a project has specific user rights. An admin group (for example) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 CakePHP
 =======
 

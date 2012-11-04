@@ -30,16 +30,19 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('stylesheet');
+		echo $this->Html->css('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+		
+		echo $this->Html->scriptBlock(sprintf('var IMAGE_PATH = "%s";', $this->Html->url('/img/')));
 	?>
 </head>
 <body>
 	<div id="wrap">
 		<header>
-			<h1><?=$project['Project']['name'];?></h1>
+			<h2><?=$project['Project']['name'];?></h1>
 			<p><?=$project['Project']['description'];?></p>
 		</header>
 		<nav>
@@ -49,7 +52,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				<li><a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "tasks"));?>">Tasks</a></li>
 				<li><a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "milestones"));?>">Milestones</a></li>
 				<li><a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "issues"));?>">Issues</a></li>
-				<li>Users</li>
+				<li><a href="#">Users</a></li>
 			</ul>
 		</nav>
 		<div id="content">
@@ -68,6 +71,11 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			?>
 		</div>
 	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<?php echo $this->Html->script('plugins/jquery.progressbar'); ?>
+	<?php echo $this->Html->script('scripts'); ?>
+	<br>
+	<br><br><br><br><br><br><br><br><br>
 	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

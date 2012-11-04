@@ -10,7 +10,6 @@
 			$params = $this->params['pass'];
 			$projectId = $params[0];
 			
-			
 			$project = $this->Task->Project->find('first', array(
 				'recursive' => -1,
 				'conditions' => array('Project.projectId' => $projectId)
@@ -44,7 +43,8 @@
 			$this->autoRender = false;
 			
 			$this->Task->read(null, $taskId);
-			$this->Task->set('status', false);
+			$this->Task->set('isClosed', true);
+			$this->Task->set('completed', date("Y-m-d H:i:s"));
 			$this->Task->save();
 			
 			$this->redirect($this->referer());
@@ -53,26 +53,44 @@
 			$this->autoRender = false;
 			
 			$this->Task->read(null, $taskId);
-			$this->Task->set('status', true);
+			$this->Task->set('isClosed', false);
+			$this->Task->set('completed', null);
 			$this->Task->save();
 			
 			$this->redirect($this->referer());
 		}
 		public function tasks($projectId) {
-			 $project = $this->Task->Project->find('first', array(
+			$isDeleted = 0;
+			$isClosed = 0;
+				
+			$params = $this->params['url'];
+			
+			if (isset($params['includeDeleted'])) $isDeleted = $params['includeDeleted'];
+			if (isset($params['isClosed'])) $isClosed = $params['isClosed'];			
+			
+			$project = $this->Task->Project->find('first', array(
 				'recursive' => 0,
 				'conditions' => array('projectId' => $projectId)
 				)
 			);
 			
-			$logs = $this->Task->find('all', array(
-				'conditions' => array('Project.projectId' => $projectId, 'Task.isDeleted' => 0),
+			$taskArgs = array(
+				'conditions' => array('Project.projectId' => $projectId, 'Task.isDeleted' => $isDeleted, 'Task.isClosed' => $isClosed),
 				'order' => array('priority' => 'DESC', 'Task.created' => 'DESC')
-				)
 			);
 			
-			$this->set("tasks", $logs);
+			$tasks = $this->Task->find('all', $taskArgs);
+			
+			$totalTasks = $this->Task->find('count', array('conditions' => array('Project.projectId' => $projectId, 'Task.isDeleted' => false)));
+			$activeTasks = $this->Task->find('count', array('conditions' => array('Project.projectId' => $projectId, 'Task.isDeleted' => false, 'Task.isClosed' => false)));
+			
+			$this->set("tasks", $tasks);
 			$this->set("project", $project);
+			
+			$this->set("percentageCompletedTasks", floor($activeTasks/$totalTasks * 100));
+			
+			$this->set("numTotalTasks", $totalTasks);
+			$this->set("numActiveTasks", $activeTasks);
 			
 			$this->set("title_for_layout", $project['Project']['name'] . " - Tasks");
 			$this->layout = 'project';
@@ -91,6 +109,10 @@
 			
 			$this->set("title_for_layout", $project['Project']['name'] . " - Task");
 			$this->layout = 'project';
+		}
+		
+		private function numActiveTasks($projectId) {
+			
 		}
 	}
 ?>

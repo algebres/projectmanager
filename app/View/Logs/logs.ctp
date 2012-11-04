@@ -1,5 +1,4 @@
-<a href="<?= $this->Html->url(array("controller" => "projects", "action"=>"view", $project['Project']['projectId']));?>">Back to project overview</a><br>
-<a href="<?= $this->Html->url(array("controller"=>"logs", "action"=>"add", $project['Project']['projectId']));?>">Add new log entry</a>
+<a class="btn gray" href="<?= $this->Html->url(array("controller"=>"logs", "action"=>"add", $project['Project']['projectId']));?>">Add Log Entry</a>
 <h2>Log entries</h2>
 <?php foreach($log_entries as $log_entry) : ?>
 	<div class="short_log_entry">

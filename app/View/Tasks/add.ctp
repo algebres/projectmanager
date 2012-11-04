@@ -1,3 +1,5 @@
+<h3>Add Task</h3>
+
 <?= $this->Form->create("Task"); ?>
 	<?= $this->Form->hidden("redirectUrl", array("value" => $this->Html->url(null, true))); ?>
 	<?= $this->Form->hidden("projectId", array("value" => $project['Project']['projectId'])); ?>

@@ -7,8 +7,8 @@
 			<td><?=$task['Task']['priority'];?></td>
 		</tr>
 		<tr>
-			<td>Status:</td>
-			<td><?=$task['Task']['status'];?></td>
+			<td>Is Closed:</td>
+			<td><?=$task['Task']['isClosed'];?></td>
 		</tr>
 		<tr>
 			<td>Description:</td>
