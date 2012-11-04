@@ -7,9 +7,17 @@
 			}
 			
 			$params = $this->params['pass'];
+			$projectId = $params[0];
 			
-			$this->set("projectId", $params[0]);
+			$project = $this->Log->Project->find('first', array('recursive' => -1, 'conditions' => array('Project.projectId' => $projectId)));
+			
+			$this->set("project", $project);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Logs - add");
+			$this->layout = 'project';
 		}
+		
+		public function edit() {}
 		
 		public function delete($logId) {
 			$this->autoRender = false;
@@ -39,19 +47,32 @@
 				)
 			); 
 			$logs = $this->Log->find('all', array(
-				'conditions' => array('Project.projectId' => $projectId, 'isDeleted' => 0),
+				'conditions' => array('Project.projectId' => $projectId, 'Project.isDeleted' => 0),
 				'order' => array('logId' => 'DESC')
 				)
 			);
 			
 			$this->set("log_entries", $logs);
 			$this->set("project", $project);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Logs");
+			$this->layout = 'project';
 		}
 		
 		public function log_entry($projectId, $logId) {
 			$log = $this->Log->findByLogid($logId);
+			
+			$project = $this->Log->Project->find('first', array(
+				'recursive' => -1,
+				'conditions' => array('Project.projectId' => $projectId)
+				)
+			);
+			
 			$this->set("log", $log);
-			$this->set("projectId", $projectId);
+			$this->set("project", $project);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Log entry");
+			$this->layout = 'project';
 		}
 		
 		public function addToMilestone($logId, $milestoneId) {

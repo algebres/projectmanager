@@ -75,6 +75,9 @@
 			$this->set("milestones", $milestones);
 			$this->set("issues", $issues);
 			$this->set("tasks", $tasks);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Overview");
+			$this->layout = 'project';
 		}
 	}
 ?>

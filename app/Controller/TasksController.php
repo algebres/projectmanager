@@ -8,8 +8,19 @@
 			}
 			
 			$params = $this->params['pass'];
+			$projectId = $params[0];
 			
-			$this->set("projectId", $params[0]);
+			
+			$project = $this->Task->Project->find('first', array(
+				'recursive' => -1,
+				'conditions' => array('Project.projectId' => $projectId)
+				)
+			);
+			
+			$this->set("project", $project);
+			$this->set("title_for_layout", $project['Project']['name'] . " - Task");
+			
+			$this->layout = 'project';
 		}
 		public function delete($taskId) {
 			$this->autoRender = false;
@@ -55,19 +66,31 @@
 			);
 			
 			$logs = $this->Task->find('all', array(
-				'conditions' => array('Project.projectId' => $projectId, 'isDeleted' => 0),
+				'conditions' => array('Project.projectId' => $projectId, 'Task.isDeleted' => 0),
 				'order' => array('priority' => 'DESC', 'Task.created' => 'DESC')
 				)
 			);
 			
 			$this->set("tasks", $logs);
 			$this->set("project", $project);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Tasks");
+			$this->layout = 'project';
 		}
 		public function task($projectId, $taskId) {
 			$task = $this->Task->findByTaskid($taskId);
 			
+			$project = $this->Task->Project->find('first', array(
+				'recursive' => -1,
+				'conditions' => array('projectId' => $projectId)
+				)
+			);
+			
 			$this->set("task", $task);
-			$this->set("projectId", $projectId);
+			$this->set("project", $project);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Task");
+			$this->layout = 'project';
 		}
 	}
 ?>

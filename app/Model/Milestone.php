@@ -17,13 +17,10 @@
 				'foreignKey' => 'projectId'
 				)
 			);
-			
-		public $hasAndBelongsToMany = array(
+		public $hasMany = array(
 			'Issues' => array(
 				'className' => 'Issue',
-				'joinTable' => 'issuesInMilestones',
-				'foreignKey' => 'milestoneId',
-				'associationForeignKey' => 'issueId'
+				'foreignKey' => 'milestoneId'
 				)
 			);
 			

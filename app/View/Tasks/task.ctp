@@ -1,4 +1,4 @@
-<a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $projectId, "tasks"));?>">Show all tasks</a>
+<a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "tasks"));?>">Show all tasks</a>
 
 <div class="task">	
 	<table>

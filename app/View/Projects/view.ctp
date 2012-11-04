@@ -1,13 +1,8 @@
-<h1><?= $project['Project']['name']; ?></h1>
-<p class="description"><?=$project['Project']['description'];?></p>
-
-<a href="<?=$this->Html->url(array('controller'=>'projects', 'action'=>'index'));?>">Back to project overview</a><br>
-
 <h2>Last 5 Log Entries</h2>
 <?php foreach ($log_entries as $log_entry) : ?>
 	<div class="short_log_entry">
 		<div style="width: 16%; display: inline-block; margin-left: -4px;">
-			<?=$log_entry['CreatedBy']['firstname'] . " " . $log_entry['CreatedBy']['lastname']; ?>
+			<?=$log_entry['CreatedBy']['name']; ?>
 		</div>
 		<div style="width: 64%; display: inline-block; margin-left: -4px;">
 			<a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId'] . "/logs/" . $log_entry['Log']['logId']);?>"><?=$log_entry['Log']['message'];?></a>

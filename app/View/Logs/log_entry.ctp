@@ -1,4 +1,4 @@
-<a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $projectId, "logs"));?>">Show all log entries</a>
+<a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "logs"));?>">Show all log entries</a>
 
 <div class="log_entry">
 	<?php 
@@ -6,7 +6,7 @@
 	?>
 	
 	
-	<div class="author"><?=$log['CreatedBy']['firstname'];?> <?=$log['CreatedBy']['lastname'];?> wrote:</div>
+	<div class="author"><?=$log['CreatedBy']['name'];?> wrote:</div>
 	<div class="message"><?=$log['Log']['message'];?></div>
 	<div class="date"><?=$log['Log']['created'];?></div>
 </div>

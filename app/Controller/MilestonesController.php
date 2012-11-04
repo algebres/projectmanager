@@ -6,8 +6,18 @@
 			}
 			
 			$params = $this->params['pass'];
+			$projectId = $params[0];
 			
-			$this->set("projectId", $params[0]);
+			$project = $this->Milestone->Project->find('first', array(
+				'recursive' => -1,
+				'conditions' => array('Project.projectId' => $projectId)
+				)
+			);
+			
+			$this->set("project", $project);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Milestones - add");
+			$this->layout = 'project';
 		}
 		public function delete($milestoneId) {
 			$this->autoRender = false;
@@ -47,23 +57,34 @@
 		}
 		public function milestones($projectId) {
 			$project = $this->Milestone->Project->find('first', array(
-				'recursive' => 0,
+				'recursive' => -1,
 				'conditions' => array('projectId' => $projectId)
 				)
 			); 
 			$milestones = $this->Milestone->find('all', array(
-				'conditions' => array('Project.projectId' => $projectId, 'isDeleted' => 0),
+				'conditions' => array('Project.projectId' => $projectId, 'Project.isDeleted' => 0),
 				'order' => array('milestoneId' => 'DESC')
 				)
 			);
 			
 			$this->set("milestones", $milestones);
 			$this->set("project", $project);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Milestones");
+			$this->layout = 'project';
 		}
 		public function milestone($projectId, $milestoneId) {
 			$milestone = $this->Milestone->findByMilestoneid($milestoneId);
+			$project = $this->Milestone->Project->find('first', array(
+				'recursive' => -1,
+				'conditions' => array('projectId' => $projectId)
+				)
+			); 
 			$this->set("milestone", $milestone);
-			$this->set("projectId", $projectId);
+			$this->set("project", $project);
+			
+			$this->set("title_for_layout", $project['Project']['name'] . " - Milestone");
+			$this->layout = 'project';
 		}
 	}
 ?>

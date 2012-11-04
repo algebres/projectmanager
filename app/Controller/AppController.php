@@ -34,14 +34,27 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	public $helpers = array('Html', 'Js' , 'Form');
 	public $components = array(
-		'Auth' => array(
-            'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
-        ),
+		//'Auth' => array(
+        //    'loginRedirect' => array('controller' => 'projects', 'action' => 'index'),
+        //    'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+		//	'authorize' => array('Controller') // Added this line
+        //),
 		'Session'
 	);
-	
+	/*
 	public function beforeFilter() {
         $this->Auth->allow('index', 'view');
     }
+	
+	public function isAuthorized($user) {
+	    // Admin can access every action
+	    if (isset($user['role']) && $user['role'] === 'admin') {
+	        return true;
+	    }
+	
+	    // Default deny
+	    return false;
+	}
+	 *
+	 */
 }

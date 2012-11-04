@@ -23,8 +23,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $title_for_layout; ?>
+		Project: <?php echo $title_for_layout; ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
@@ -39,9 +38,20 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 </head>
 <body>
 	<div id="wrap">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
+		<header>
+			<h1><?=$project['Project']['name'];?></h1>
+			<p><?=$project['Project']['description'];?></p>
+		</header>
+		<nav>
+			<ul>
+				<li><a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId']));?>">Overview</a></li>
+				<li><a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "logs"));?>">Logs</a></li>
+				<li><a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "tasks"));?>">Tasks</a></li>
+				<li><a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "milestones"));?>">Milestones</a></li>
+				<li><a href="<?=$this->Html->url(array("controller"=>"projects", "action"=>"view", $project['Project']['projectId'], "issues"));?>">Issues</a></li>
+				<li>Users</li>
+			</ul>
+		</nav>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>

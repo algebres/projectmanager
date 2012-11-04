@@ -1,0 +1,10 @@
+<nav>
+	<ul>
+		<li>Overview</li>
+		<li>Logs</li>
+		<li>Tasks</li>
+		<li>Milestones</li>
+		<li>Issues</li>
+		<li>Users</li>
+	</ul>
+</nav>
