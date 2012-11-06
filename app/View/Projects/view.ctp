@@ -20,10 +20,11 @@
 <?php foreach ($tasks as $task) : ?>
 	<div class="task">
 		<div>
-			<span style="display:inline-block; width: 80px;" class="priority <?=$task['Task']['priority'];?>">
+			<a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId'] . "/tasks/" . $task['Task']['taskId']);?>"><?=$task['Task']['description'];?></a>
+			
+			<span class="priority <?=strtolower($task['Task']['priority']);?>">
 				<?=$task['Task']['priority'];?>
 			</span>
-			<a href="<?=$this->Html->url("/projects/view/" . $project['Project']['projectId'] . "/tasks/" . $task['Task']['taskId']);?>"><?=$task['Task']['description'];?></a>
 		</div>
 	</div>
 <?php endforeach; ?>
